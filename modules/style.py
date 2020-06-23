@@ -1,5 +1,5 @@
 # Text Color Styling
-class style() :
+class Style :
     RED = lambda x: '\033[31m' + str(x)
     GREEN = lambda x: '\033[32m' + str(x)
     YELLOW = lambda x: '\033[33m' + str(x)
