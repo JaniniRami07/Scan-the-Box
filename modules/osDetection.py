@@ -1,61 +1,54 @@
 import nmap3, sys, time
+from modules.style import Style
 
-
-class style():
-    RED = lambda x: '\033[31m' + str(x)
-    GREEN = lambda x: '\033[32m' + str(x)
-    YELLOW = lambda x: '\033[33m' + str(x)
-    BLUE = lambda x: '\033[34m' + str(x)
-    CYAN = lambda x: '\033[36m' + str(x)
-    RESET = lambda x: '\033[0m' + str(x)
-
-def osDetection():
+def os_detection():
     print (u"{}[2J{}[;H".format(chr(27), chr(27)))
-    host = str(input(style.GREEN('[+]') + style.RESET(' Enter the machine IP address [eg: 10.10.10.188]: ')))
-    print(style.GREEN('[+]') + style.RESET(' Scanning the host...'))
+    host = str(input(Style.GREEN('[+]') + Style.RESET(' Enter the machine IP address [eg: 10.10.10.188]: ')))
+    print(Style.GREEN('[+]') + Style.RESET(' Scanning the host...'))
     tic = time.perf_counter()
     nmScan = nmap3.NmapScanTechniques()
     try:
         data = nmScan.nmap_os_detection(host)
     except:
-        print(style.RED('[!]') + style.RESET('Error 00-80: Cannot reach the host.'))
-
-
-    print(style.GREEN('\n[+]') + style.RESET(f' Host: {host}'))
-    print(style.GREEN('[+]') + style.RESET(' OS detection possibilities:'))
-
+        print(Style.RED('[!]') + Style.RESET('Error 00-80: Cannot reach the host.'))
+        input(Style.YELLOW('\n[!]') + Style.RESET(' Press enter to go back to main menu.'))
+        return 0
+    
     oss = len(data)
+
+    print(Style.GREEN('\n[+]') + Style.RESET(f' Host: {host}'))
+    print(Style.GREEN('[+]') + Style.RESET(' OS detection possibilities:'))
 
     for os in range(0,oss):
         try:
-            print(style.GREEN('\n[+]') + style.RESET(f' OS Name: {data[os]["name"]}'))
+            print(Style.GREEN('\n[+]') + Style.RESET(f' OS Name: {data[os]["name"]}'))
         except:
-            print(style.GREEN('\n[+]') + style.RESET(' OS Name: Not found.'))
+            print(Style.GREEN('\n[+]') + Style.RESET(' OS Name: Not found.'))
         try:
-            print(style.YELLOW('    [-]') + style.RESET(f' Accuracy: {data[os]["accuracy"]}%'))
+            print(Style.YELLOW('    [-]') + Style.RESET(f' Accuracy: {data[os]["accuracy"]}%'))
         except:
-            print(style.YELLOW('    [-]') + style.RESET(' Accuracy: Not found.'))
+            print(Style.YELLOW('    [-]') + Style.RESET(' Accuracy: Not found.'))
         try:
 
-            print(style.YELLOW('    [-]') + style.RESET(f' Type: {data[os]["osclass"]["type"]}'))
+            print(Style.YELLOW('    [-]') + Style.RESET(f' Type: {data[os]["osclass"]["type"]}'))
         except:
-            print(style.YELLOW('    [-]') + style.RESET(' Type: not found.'))
+            print(Style.YELLOW('    [-]') + Style.RESET(' Type: not found.'))
         try:
-            print(style.YELLOW('    [-]') + style.RESET(f' OS Family: {data[os]["osclass"]["osfamily"]}'))
+            print(Style.YELLOW('    [-]') + Style.RESET(f' OS Family: {data[os]["osclass"]["osfamily"]}'))
         except:
-            print(style.YELLOW('    [-]') + style.RESET(' OS Family: Not found.'))
+            print(Style.YELLOW('    [-]') + Style.RESET(' OS Family: Not found.'))
         try:
-            print(style.YELLOW('    [-]') + style.RESET(f' OS Generation: {data[os]["osclass"]["osgen"]}'))
+            print(Style.YELLOW('    [-]') + Style.RESET(f' OS Generation: {data[os]["osclass"]["osgen"]}'))
         except:
-            print(style.YELLOW('    [-]') + style.RESET(' OS Generation: Not found.'))
+            print(Style.YELLOW('    [-]') + Style.RESET(' OS Generation: Not found.'))
 
         try:
-            print(style.YELLOW('    [-]') + style.RESET(f' OS CPE: {data[os]["cpe"]}'))
+            print(Style.YELLOW('    [-]') + Style.RESET(f' OS CPE: {data[os]["cpe"]}'))
         except:
-            print(style.YELLOW('    [-]') + style.RESET(' OS CPE: Not found.'))
+            print(Style.YELLOW('    [-]') + Style.RESET(' OS CPE: Not found.'))
 
 
 
     toc = time.perf_counter()
-    print(style.GREEN('\n[+]') + style.RESET(f' Scan done: 1 IP address (1 host up) scanned in {toc - tic:0.2f} seconds.'))
-    input(style.YELLOW('\n[!]') + style.RESET(' Press anything to go back to main menu.'))
+    print(Style.GREEN('\n[+]') + Style.RESET(f' Scan done: 1 IP address (1 host up) scanned in {toc - tic:0.2f} seconds.'))
+    input(Style.YELLOW('\n[!]') + Style.RESET(' Press enter to go back to main menu.'))
