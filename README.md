@@ -21,5 +21,7 @@ python3 STB.py
 # Contributors
 There are many ways to improve this project, feel free to contribute with your pull request or submit new ideas about this script to add in the issues section
 
-# Contact:
-proxy07@tutanota.com
+# Author:
+- Email: pr0xy07@tutanota.com
+- Twitter : @pr0xy07
+- Bitcoin Donations: 17qychS2gBAN6VPMq9ooj9EBD3CFTCFEKC
